@@ -25,3 +25,8 @@ scrape_configs:
       - targets: ['minio:9000']
         labels:
           service: 'minio'
+
+  - job_name: "airflow"
+    static_configs:
+      - targets:
+          - statsd-exporter:9102
