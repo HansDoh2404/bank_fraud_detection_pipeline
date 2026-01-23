@@ -15,9 +15,8 @@ scrape_configs:
     - targets: ['kafka:9404']
 
   - job_name: 'nifi'
-    metrics_path: '/nifi-api/flow/metrics/prometheus'
     static_configs:
-    - targets: ['nifi:9992']
+    - targets: ['nifi:19092']
 
   - job_name: 'minio'
     metrics_path: /minio/v2/metrics/cluster

@@ -1,7 +1,6 @@
+startDelaySeconds: 0
+ssl: false
 lowercaseOutputName: true
 lowercaseOutputLabelNames: true
-whitelistObjectNames:
-  - "org.apache.nifi:*"
-  - "java.lang:*"
 rules:
   - pattern: ".*"

@@ -109,23 +109,21 @@ services:
     container_name: nifi
     ports:
       - "8081:8080"  # NiFi UI
-      - "9992:9992"  # JMX Prometheus exporter
+      - "19092:19092"  # JMX Prometheus exporter
     environment:
       NIFI_WEB_HTTP_PORT: 8080
       NIFI_WEB_HTTP_HOST: 0.0.0.0
-      NIFI_JVM_OPTS: >
-        -javaagent:/etc/jmx/jmx_prometheus_javaagent-0.20.0.jar=9992:/etc/jmx/nifi-jmx-config.yml
-        -Xms1g -Xmx1g
+      NIFI_JAVA_OPTS_APPEND: >
+        -javaagent:/etc/jmx/jmx_prometheus_javaagent-0.20.0.jar=19092:/etc/jmx/nifi-jmx-config.yml
     volumes:
-      - nifi_conf:/opt/nifi/nifi-current/conf
-      - ./jmx-exporter/nifi:/etc/jmx   # doit contenir : jmx_prometheus_javaagent-0.20.0.jar + nifi-jmx-config.yml
+      - ./nifi_conf/bootstrap.conf:/opt/nifi/nifi-current/conf/bootstrap.conf
+      - ./jmx-exporter/nifi:/etc/jmx
     networks:
       - monitoring
     healthcheck:
       test: "curl -f http://localhost:8080/nifi/ || exit 1"
       interval: 30s
       retries: 5
-
 
   statsd-exporter:
     image: prom/statsd-exporter:latest
