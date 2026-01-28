@@ -1,0 +1,8 @@
+confluent-kafka==2.12.2
+Faker==40.1.0
+faker-commerce==1.0.4
+numpy==2.4.0
+pandas==2.3.3
+pyarrow==22.0.0
+pyspark==3.5.3
+minio

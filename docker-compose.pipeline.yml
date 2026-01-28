@@ -31,8 +31,8 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password
       MINIO_PROMETHEUS_AUTH_TYPE: public
     volumes:
       - minio_data:/data
@@ -56,7 +56,7 @@ services:
       - monitoring
     entrypoint: >
       /bin/sh -c "
-      until (/usr/bin/mc alias set minio http://minio:9000 minioadmin minioadmin) do echo '...waiting...' && sleep 1; done;
+      until (/usr/bin/mc alias set minio http://minio:9000 admin password) do echo '...waiting...' && sleep 1; done;
       /usr/bin/mc mb minio/bronze;
       /usr/bin/mc mb minio/silver;
       /usr/bin/mc mb minio/gold;
